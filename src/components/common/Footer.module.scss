@@ -1,0 +1,83 @@
+@import "../../vars";
+.Footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 31rem;
+
+  position: relative;
+
+  padding: 14rem 25rem;
+
+  background-color: $bg-color;
+
+  &-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    padding-right: 8.2rem;
+
+    svg {
+      path {
+        fill: $white;
+      }
+    }
+
+    &-block {
+      display: flex;
+      flex-direction: column;
+      margin-left: 0.3rem;
+    }
+    &-title {
+      color: $white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-transform: uppercase;
+
+      padding-bottom: 3px;
+    }
+    &-description {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: $white;
+    }
+  }
+  &-nav {
+    padding-right: 7.1rem;
+    nav ul li {
+      color: $white;
+
+      transition: all 0.2s linear;
+      &:hover {
+        color: $white;
+        opacity: 0.9;
+      }
+    }
+  }
+  &-slideToTop {
+    cursor: pointer;
+    padding-right: 10.3rem;
+    svg {
+      transform: rotate(-90deg);
+    }
+  }
+  &-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.7rem;
+  }
+  &-number {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $white;
+    padding-right: 7.3rem;
+    white-space: nowrap;
+  }
+}
+.Footer {
+  flex: 0 0 auto;
+}

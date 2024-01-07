@@ -1,0 +1,49 @@
+@import "../../vars";
+.Main {
+  &-title {
+    font-weight: 900;
+    font-size: 2.5rem;
+    line-height: 3rem;
+    color: $text-color;
+  }
+  &-sort {
+    display: flex;
+    align-items: center;
+    gap: 31px;
+    &-link {
+      cursor: pointer;
+      font-size: 1.3rem;
+      font-weight: 400;
+      transition: color 0.2s linear;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+  &-products {
+    display: flex;
+    align-items: center;
+    gap: 93px;
+
+    &-item {
+      width: 100%;
+      margin: 4.5rem 1.5rem 10.3rem;
+      }
+  }
+  &-receipts {
+    margin: 10.4rem 0;
+  }
+  &-catalog {
+    padding-bottom: 6.4rem;
+
+    &-item {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+  }
+  &-about {
+    padding-bottom: 7.6rem;
+  }
+}

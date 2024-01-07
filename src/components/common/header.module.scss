@@ -1,0 +1,123 @@
+@import "../../vars";
+@import "../../mixins";
+.header {
+  flex: 0 0 auto;
+}
+.header {
+  max-height: 8.1rem;
+  padding: 2.35rem 0;
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include breakpoint($tablet-width) {
+      justify-content: unset;
+    }
+  }
+  &-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    &-block {
+      display: flex;
+      flex-direction: column;
+      margin-left: 0.3rem;
+    }
+    &-title {
+      color: $primary;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    &-description {
+      font-size: 1.1rem;
+      font-weight: 400;
+      white-space: nowrap;
+      padding-top: 0.3rem;
+    }
+    @include breakpoint($tablet-width) {
+      padding-right: 10.3rem;
+    }
+  }
+  &-nav {
+    @include breakpoint($tablet-width) {
+      display: none;
+    }
+  }
+  &-container {
+    max-width: 100%;
+    width: $desktop-width;
+    margin: 0 auto;
+  }
+  &-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.7rem;
+
+    button {
+      @include breakpoint($tablet-width) {
+        display: none;
+      }
+    }
+    @include breakpoint($tablet-width) {
+      padding-right: 7rem;
+    }
+  }
+  &-profile {
+    color: $text-color;
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.7rem;
+  }
+  &-number {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $text-color;
+    white-space: nowrap;
+
+    @include breakpoint($tablet-width) {
+      padding-right: 8.8rem;
+    }
+  }
+
+  &-burger {
+    display: none;
+
+    width: 3.1rem;
+    height: 0.3rem;
+    background-color: $text-color;
+
+    position: relative;
+
+    cursor: pointer;
+
+    &:after {
+      content: "";
+      width: 3.1rem;
+      height: 0.3rem;
+      background-color: $text-color;
+      position: absolute;
+      bottom: 0.7rem;
+    }
+    &::before {
+      content: "";
+      width: 3.1rem;
+      height: 0.3rem;
+      background-color: $text-color;
+      position: absolute;
+      top: 0.7rem;
+    }
+
+    @include breakpoint($tablet-width) {
+      display: block;
+    }
+  }
+}

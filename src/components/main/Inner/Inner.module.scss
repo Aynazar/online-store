@@ -1,0 +1,133 @@
+@import "../../../_vars.scss";
+.Inner {
+  position: relative;
+  display: flex;
+  width: 100%;
+
+  padding-bottom: 9.6rem;
+
+  &-item {
+    position: relative;
+    &:first-child {
+      width: 55%;
+    }
+
+    width: 45%;
+  }
+  &-title {
+    padding-top: 8.6rem;
+    padding-bottom: 3.9rem;
+    color: $text-color;
+    font-size: 3.6rem;
+    font-weight: 900;
+
+    width: 502px;
+  }
+  &-description {
+    padding-bottom: 4.5rem;
+
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: $text-color;
+
+    width: 37rem;
+
+    line-height: 2.3rem;
+  }
+  &-image {
+    width: 68.6rem;
+    height: 44.4rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    box-shadow: 4rem -4rem 0 rgba(#3145ff0f, 0.06);
+  }
+  &-droneImg {
+    position: absolute;
+    top: 3.5rem;
+    left: -35%;
+  }
+  &-icon {
+    position: absolute;
+    bottom: 5%;
+    right: -10%;
+    cursor: pointer;
+  }
+  &-image-container {
+    overflow: hidden;
+  }
+  &-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 10%;
+    right: 0;
+
+    &-title {
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: $white;
+    }
+    &-description {
+      font-weight: 400;
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+      color: $white;
+      width: 15.6rem;
+    }
+    &-price {
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1.7rem;
+      color: $white;
+    }
+  }
+
+  &-slide {
+    opacity: 0;
+    visibility: hidden;
+
+    transition: all 0.3s linear;
+
+    &--visible {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  &-swiper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.8rem;
+
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+
+    &-dot {
+      border: none;
+
+      content: ".";
+      width: 3.9rem;
+      height: 0.8rem;
+      background-color: $white;
+      opacity: 0.35;
+
+      transition: all 0.5s linear;
+
+      &-active {
+        opacity: 1;
+      }
+    }
+  }
+}
+@keyframes slideActive {
+  0% {
+  }
+  100% {
+  }
+}

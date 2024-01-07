@@ -1,0 +1,76 @@
+@import "../../../vars";
+.Product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  box-shadow: 0 1.5rem 5rem 0 rgba(67, 76, 109, 0.08);
+
+  max-width: 25%;
+
+  margin: 0 1.5rem 0;
+  padding: 3.4rem 4rem;
+
+  &--noneMargin {
+    margin: 0 1.5rem 0;
+  }
+
+  &-title {
+    font-weight: 900;
+    font-size: 1.7rem;
+    line-height: 2rem;
+
+    padding-bottom: 3.1rem;
+  }
+  &-preview {
+    padding-bottom: 3.1rem;
+  }
+  &-img {
+    width: 151px;
+    height: 173px;
+    object-fit: cover;
+    border-radius: 0.8rem;
+  }
+  &-price {
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: $primary;
+  }
+  &-content {
+    margin: 0 auto;
+  }
+  &-info {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 18px;
+
+    padding-bottom: 3.4rem;
+
+    &-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      span {
+        color: $text-color-secondary;
+        font-size: 1.2rem;
+        font-weight: 400;
+
+        display: block;
+        width: 25px;
+      }
+      p {
+        width: 0;
+        margin: 0 auto;
+      }
+    }
+  }
+  &-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &-icon {
+    cursor: pointer;
+  }
+}
