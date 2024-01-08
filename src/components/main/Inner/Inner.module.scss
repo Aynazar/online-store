@@ -1,4 +1,5 @@
 @import "../../../_vars.scss";
+@import "../../../mixins";
 .Inner {
   position: relative;
   display: flex;
@@ -6,13 +7,21 @@
 
   padding-bottom: 9.6rem;
 
+  @include breakpoint($tablet-width) {
+    flex-direction: column;
+    gap: 72px;
+  }
+
   &-item {
     position: relative;
     &:first-child {
-      width: 55%;
+      width: 65%;
     }
 
     width: 45%;
+    @include breakpoint($tablet-width) {
+      width: 100% !important;
+    }
   }
   &-title {
     padding-top: 8.6rem;
@@ -21,7 +30,10 @@
     font-size: 3.6rem;
     font-weight: 900;
 
-    width: 502px;
+    width: 80%;
+    text-wrap: balance;
+
+    line-height: normal;
   }
   &-description {
     padding-bottom: 4.5rem;
@@ -33,26 +45,69 @@
     width: 37rem;
 
     line-height: 2.3rem;
+
+    @include breakpoint($tablet-width) {
+      width: 100% !important;
+    }
   }
   &-image {
-    width: 68.6rem;
-    height: 44.4rem;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    max-width: none;
 
-    box-shadow: 4rem -4rem 0 rgba(#3145ff0f, 0.06);
+    height: 516px;
+    user-select: none;
+
+    object-fit: cover;
+
+    @include breakpoint($tablet-width) {
+      width: 100%;
+    }
+    @include breakpoint($mobile-width) {
+      height: 469px;
+    }
+
+    &:after {
+      content: "";
+      background-color: rgba(#3145ff0f, 0.06);
+      padding: 4rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 100;
+    }
+  }
+  &-picture {
+    display: flex;
+    margin-top: 7rem;
+    margin-left: -20rem;
+
+    @include breakpoint($tablet-width) {
+      margin: 2.3rem;
+    }
   }
   &-droneImg {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    flex-shrink: 0;
+
+    object-fit: contain;
+    object-position: center;
+  }
+  &-picture {
     position: absolute;
-    top: 3.5rem;
-    left: -35%;
+    top: 0;
+    left: 0;
   }
   &-icon {
     position: absolute;
     bottom: 5%;
     right: -10%;
     cursor: pointer;
+
+    @include breakpoint($tablet-width) {
+      display: none;
+    }
   }
   &-image-container {
     overflow: hidden;
@@ -65,7 +120,7 @@
 
     position: absolute;
     bottom: 10%;
-    right: 0;
+    right: 5%;
 
     &-title {
       font-weight: 900;
@@ -85,9 +140,33 @@
       line-height: 1.7rem;
       color: $white;
     }
+    &-inner {
+      position: relative;
+      &::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        background-color: $white;
+        position: absolute;
+        top: -15%;
+        left: -8%;
+
+        @include breakpoint($mobile-width) {
+          top: -15%;
+          left: -5%;
+        }
+      }
+    }
+
+    @include breakpoint($mobile-width) {
+      padding-top: 15rem;
+      top: 0;
+      left: 10%;
+    }
   }
 
   &-slide {
+    display: flex;
     opacity: 0;
     visibility: hidden;
 
@@ -123,11 +202,5 @@
         opacity: 1;
       }
     }
-  }
-}
-@keyframes slideActive {
-  0% {
-  }
-  100% {
   }
 }

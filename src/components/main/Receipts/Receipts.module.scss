@@ -1,4 +1,5 @@
 @import "../../../vars";
+@import "../../../mixins";
 .receipts {
   display: flex;
   justify-content: center;
@@ -6,11 +7,15 @@
   gap: 3rem;
   width: 100%;
 
+  @include breakpoint($tablet-width) {
+    flex-direction: column;
+  }
+
   &-item {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    width: 50%;
+    width: 100%;
     &:nth-child(1) {
       &::before {
         content: "";
@@ -50,13 +55,14 @@
   }
 
   &-preview {
-    width: calc($desktop-width / 2);
+    max-width: none;
+    width: 100%;
     height: 425px;
 
-    background-position: center 0;
-    background-repeat: no-repeat;
+    object-position: center;
+    object-fit: cover;
+
     transition: all 0.3s linear;
-    background-size: cover;
   }
   &-info {
     display: flex;
@@ -67,6 +73,14 @@
     left: 0;
     z-index: 100;
     padding: 22.6rem 10.9rem 11.3rem 8.8rem;
+
+    @include breakpoint($tablet-width) {
+      padding: 180px 103px 131px 73px;
+    }
+
+    @include breakpoint($mobile-width) {
+      padding: 178px 53px 131px 53px;
+    }
 
     &::before {
       content: "";
@@ -81,13 +95,21 @@
   }
   &-title {
     font-weight: 900;
-    font-size: 2.7rem;
+    font-size: 27px;
     color: $white;
     line-height: 121%;
 
     padding-bottom: 0.8rem;
 
     text-wrap: balance;
+
+    @include breakpoint($tablet-width) {
+      font-size: 25px;
+      //width: 75%;
+    }
+    @include breakpoint($mobile-width) {
+      font-size: 20px;
+    }
   }
   &-description {
     font-weight: 400;

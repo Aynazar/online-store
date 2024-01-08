@@ -1,46 +1,103 @@
 @import "../../vars";
+@import "../../mixins";
 .Main {
   &-title {
     font-weight: 900;
     font-size: 2.5rem;
     line-height: 3rem;
     color: $text-color;
+    white-space: nowrap;
+
+    text-wrap: balance;
+  }
+  &-title {
+    margin-right: 93px;
+
+    padding-bottom: 29px;
+    @include breakpoint($tablet-width) {
+      margin-right: 64px;
+    }
   }
   &-sort {
     display: flex;
     align-items: center;
+
+    padding-bottom: 29px;
     gap: 31px;
     &-link {
       cursor: pointer;
       font-size: 1.3rem;
       font-weight: 400;
       transition: color 0.2s linear;
+      flex-grow: 1;
 
       &:hover {
         color: $primary;
+      }
+
+      &-active {
+        color: $primary;
+      }
+
+      @include breakpoint($mobile-width) {
+        font-size: 1rem;
+        transition: all 0.3s linear;
+        &:last-child {
+          visibility: hidden;
+          opacity: 0;
+        }
       }
     }
   }
   &-products {
     display: flex;
     align-items: center;
-    gap: 93px;
+    padding-bottom: 29px;
+    flex-wrap: wrap;
 
     &-item {
       width: 100%;
-      margin: 4.5rem 1.5rem 10.3rem;
-      }
+      margin: 2.5rem 1.5rem 10.3rem;
+    }
   }
   &-receipts {
     margin: 10.4rem 0;
   }
   &-catalog {
     padding-bottom: 6.4rem;
+    width: 100%;
 
     &-item {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
+      row-gap: 27px;
+    }
+
+    &-item {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      column-gap: 30px;
+
+      @include breakpoint($desktop-width) {
+        grid-template-columns: repeat(3, calc(100% / 3 - 20px));
+        a div div picture img {
+          width: 284px !important;
+          height: 275px !important;
+        }
+      }
+      @include breakpoint($tablet-width) {
+        grid-template-columns: repeat(2, calc(100% / 2 - 15px));
+        a div div picture img {
+          width: 324px !important;
+          height: 305px !important;
+        }
+      }
+      @include breakpoint($mobile-width) {
+        grid-template-columns: repeat(1, calc(100% - 10px));
+
+        a div div picture img {
+          width: 410px !important;
+          height: 371px !important;
+        }
+      }
     }
   }
   &-about {

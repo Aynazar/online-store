@@ -1,4 +1,5 @@
 @import "../../vars";
+@import "../../mixins";
 .Footer {
   display: flex;
   align-items: center;
@@ -7,9 +8,22 @@
 
   position: relative;
 
-  padding: 14rem 25rem;
+  padding: 140px 250px;
 
   background-color: $bg-color;
+
+  @include breakpoint($tablet-width) {
+    flex-direction: column;
+    align-items: start;
+    row-gap: 42px;
+
+    padding: 140px 55px;
+  }
+  @include breakpoint($mobile-width) {
+    align-items: center;
+
+    padding: 140px 0;
+  }
 
   &-logo {
     display: flex;
@@ -19,6 +33,10 @@
     cursor: pointer;
 
     padding-right: 8.2rem;
+
+    @include breakpoint($tablet-width) {
+      padding-right: 0;
+    }
 
     svg {
       path {
@@ -47,6 +65,9 @@
   }
   &-nav {
     padding-right: 7.1rem;
+    @include breakpoint($tablet-width) {
+      padding-right: 0;
+    }
     nav ul li {
       color: $white;
 
@@ -60,22 +81,23 @@
   &-slideToTop {
     cursor: pointer;
     padding-right: 10.3rem;
+    @include breakpoint($tablet-width) {
+      padding-right: 0;
+    }
     svg {
       transform: rotate(-90deg);
     }
-  }
-  &-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3.7rem;
   }
   &-number {
     font-size: 1.3rem;
     font-weight: 700;
     color: $white;
-    padding-right: 7.3rem;
+    padding-right: 73px;
     white-space: nowrap;
+
+    @include breakpoint($tablet-width) {
+      padding-right: 0;
+    }
   }
 }
 .Footer {

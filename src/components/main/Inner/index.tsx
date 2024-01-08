@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { ChangeEvent, memo, useCallback, useState } from "react";
+import { ChangeEvent, memo, useCallback, useEffect, useState } from "react";
 
 import styles from "./Inner.module.scss";
 
@@ -8,6 +8,7 @@ import bgInner from "../../../../src/assets/images/bg-inner.jpg";
 import Button from "../../ui/Button.tsx";
 import ArrowIcon from "../../ui/icons/ArrowIcon.tsx";
 import clsx from "../../../utils/clsx.ts";
+import useResize from "@/hooks/useZoom.ts";
 
 const products = [
   {
@@ -41,7 +42,9 @@ const products = [
 ];
 
 const Inner = () => {
+  const [zoomWidth, setZoomWidth] = useState<number>(686);
   const [activeSlide, setActiveSlide] = useState<number>(0);
+  const { zoom } = useResize();
 
   const onSlide = useCallback(() => {
     products.length === activeSlide + 1
@@ -63,6 +66,8 @@ const Inner = () => {
     [],
   );
 
+  useEffect(() => {}, [zoom]);
+
   return (
     <div className={styles["Inner"]}>
       <div className={styles["Inner-item"]}>
@@ -78,9 +83,11 @@ const Inner = () => {
         </Button>
       </div>
       <div className={styles["Inner-item"]}>
-        <div
+        <img
           className={styles["Inner-image"]}
-          style={{ backgroundImage: `url(${bgInner})` }}
+          src={bgInner}
+          alt="Background image"
+          name={bgInner}
         />
         <div className={styles["Inner-image-container"]}>
           {products.map((obj, index) => (
@@ -91,21 +98,25 @@ const Inner = () => {
                 index === activeSlide && styles["Inner-slide--visible"],
               )}
             >
-              <div
-                className={styles["Inner-droneImg"]}
-                style={{
-                  backgroundImage: `url(${obj.img})`,
-                  width: 680,
-                  height: 374,
-                }}
-              />
+              <picture className={styles["Inner-picture"]}>
+                <img
+                  className={styles["Inner-droneImg"]}
+                  src={obj.img}
+                  alt={obj.name}
+                  width={687}
+                  height={374}
+                  title={obj.name}
+                />
+              </picture>
               <div className={styles["Inner-info"]}>
-                <div className={styles["Inner-info-title"]}>{obj.name}</div>
-                <div className={styles["Inner-info-description"]}>
-                  {obj.description}
-                </div>
-                <div className={styles["Inner-info-price"]}>
-                  {obj.price} руб.
+                <div className={styles["Inner-info-inner"]}>
+                  <div className={styles["Inner-info-title"]}>{obj.name}</div>
+                  <div className={styles["Inner-info-description"]}>
+                    {obj.description}
+                  </div>
+                  <div className={styles["Inner-info-price"]}>
+                    {obj.price} руб.
+                  </div>
                 </div>
               </div>
             </div>

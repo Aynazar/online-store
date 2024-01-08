@@ -26,9 +26,12 @@ const Receipts: FC<OwnProps> = ({ receipts }) => {
         className={styles["receipts-item"]}
         onClick={() => onLink(receiptsInfo[0].collection)}
       >
-        <div
+        <img
           className={styles["receipts-preview"]}
-          style={{ backgroundImage: `url(${receiptsInfo[0].previewUrl})` }}
+          src={receiptsInfo[0].previewUrl}
+          alt={receiptsInfo[0].title}
+          srcSet={receiptsInfo[0].previewUrl}
+          about={receiptsInfo[0].description}
         />
         <div
           className={styles["receipts-info"]}
@@ -47,9 +50,12 @@ const Receipts: FC<OwnProps> = ({ receipts }) => {
         className={styles["receipts-item"]}
         onClick={() => onLink(receiptsInfo[1].collection)}
       >
-        <div
+        <img
           className={styles["receipts-preview"]}
-          style={{ backgroundImage: `url(${receiptsInfo[1].previewUrl})` }}
+          src={receiptsInfo[1].previewUrl}
+          alt={receiptsInfo[1].title}
+          srcSet={receiptsInfo[1].previewUrl}
+          about={receiptsInfo[1].description}
         />
         <div className={styles["receipts-info"]}>
           <div className={styles["receipts-title"]}>

@@ -11,14 +11,13 @@ import Navbar from "@/components/common/Navbar";
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleClickBurger = useCallback(() => {
-    document.body.classList.add("no-scroll");
     setIsOpen(true);
+    document.body.classList.add("no-scroll");
   }, []);
 
   const onClose = useCallback(() => {
-    console.log("tew");
-    setIsOpen(true);
     document.body.classList.remove("no-scroll");
+    setIsOpen(false);
   }, []);
 
   return (
@@ -37,7 +36,8 @@ const Header = () => {
           <div className={styles["header-nav"]}>
             <Nav />
           </div>
-          <div className={styles["header-actions"]}>
+
+          <div className={styles["header-action"]}>
             <div className={styles["header-number"]}>+7 9374 97 25 24</div>
             <Button type="button" variant="outline">
               Заказать звонок
@@ -63,7 +63,7 @@ const Header = () => {
                   fill="#EB2D66"
                 />
               </svg>
-              <div>
+              <div className={styles["header-info"]}>
                 124 руб.
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -77,10 +77,11 @@ const Header = () => {
               </div>
             </div>
           </div>
-
-          <div className={styles["header-burger"]} onClick={handleClickBurger}>
-            <Navbar isOpen={isOpen} closeNavbar={onClose} />
-          </div>
+          <div
+            className={styles["header-burger"]}
+            onClick={handleClickBurger}
+          />
+          <Navbar isOpen={isOpen} closeNavbar={onClose} />
         </div>
       </div>
     </header>

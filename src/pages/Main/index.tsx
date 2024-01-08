@@ -9,6 +9,7 @@ import Receipts from "@/components/main/Receipts";
 import { DReceipts } from "@/data/ReceiptsData.ts";
 import getRandomInt from "@/utils/getRandomInt.ts";
 import AboutIt from "@/components/main/AboutIt";
+import clsx from "@/utils/clsx.ts";
 
 const Main = () => {
   const randomId = getRandomInt(1, DReceipts.length);
@@ -19,7 +20,13 @@ const Main = () => {
       <div className={styles["Main-products"]}>
         <div className={styles["Main-title"]}>Горчие поступления</div>
         <ul className={styles["Main-sort"]}>
-          <li className={styles["Main-sort-link"]} aria-label="Все">
+          <li
+            className={clsx(
+              styles["Main-sort-link"],
+              styles["Main-sort-link-active"],
+            )}
+            aria-label="Все"
+          >
             Все
           </li>
           <li className={styles["Main-sort-link"]} aria-label="Телефоны">
@@ -58,7 +65,7 @@ const Main = () => {
       </div>
 
       <div className={styles["Main-about"]}>
-        <div className={styles["Main-title"]} style={{ paddingBottom: "5rem" }}>
+        <div className={styles["Main-title"]} style={{ paddingBottom: "50px" }}>
           О “Гаджетариуме” в цифрах
         </div>
         <AboutIt />

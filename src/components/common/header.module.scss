@@ -8,17 +8,19 @@
   padding: 2.35rem 0;
   &-inner {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    button {
+      @include breakpoint($tablet-width) {
+        display: none;
+      }
 
-    @include breakpoint($tablet-width) {
-      justify-content: unset;
     }
   }
   &-logo {
     display: flex;
     align-items: center;
-    justify-content: center;
 
     cursor: pointer;
     &-block {
@@ -38,33 +40,35 @@
       white-space: nowrap;
       padding-top: 0.3rem;
     }
-    @include breakpoint($tablet-width) {
-      padding-right: 10.3rem;
-    }
   }
   &-nav {
+    flex-grow: 1;
     @include breakpoint($tablet-width) {
       display: none;
     }
   }
   &-container {
-    max-width: 100%;
-    width: $desktop-width;
+    max-width: $desktop-width;
+    padding: 0 1.5rem;
     margin: 0 auto;
+
+    @include breakpoint($mobile-width) {
+      max-width: $mobile-width;
+      padding: 0 1.6rem;
+    }
+
+    @include breakpoint($tablet-width) {
+      max-width: $tablet-width;
+      padding: 0 1rem;
+    }
   }
-  &-actions {
+  &-action {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 3.7rem;
+    gap: 40px;
 
-    button {
-      @include breakpoint($tablet-width) {
-        display: none;
-      }
-    }
-    @include breakpoint($tablet-width) {
-      padding-right: 7rem;
+    @include breakpoint($tablet-mobile-width) {
+      display: none;
     }
   }
   &-profile {
@@ -76,6 +80,10 @@
     align-items: center;
     justify-content: center;
     gap: 1.7rem;
+
+    flex-grow: 1;
+
+    white-space: nowrap;
   }
   &-number {
     font-size: 1.3rem;
@@ -85,6 +93,12 @@
 
     @include breakpoint($tablet-width) {
       padding-right: 8.8rem;
+    }
+  }
+
+  &-info {
+    @include breakpoint($tablet-mobile-width) {
+      display: none;
     }
   }
 

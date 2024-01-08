@@ -30,12 +30,14 @@ const Footer = () => {
       <div className={styles["Footer-slideToTop"]} onClick={handleSlideToTop}>
         <ArrowIcon />
       </div>
-      <div className={styles["Footer-actions"]}>
-        <div className={styles["Footer-number"]}>+7 9374 97 25 24</div>
-        <Button type="button" variant="outline">
-          Заказать звонок
-        </Button>
-      </div>
+      <div className={styles["Footer-number"]}>+7 9374 97 25 24</div>
+      <Button
+        type="button"
+        variant="outline"
+        className={styles["Footer-button"]}
+      >
+        Заказать звонок
+      </Button>
     </footer>
   );
 };

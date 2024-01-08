@@ -1,3 +1,4 @@
+@import "../../../vars";
 .Navbar {
   background-color: rgba(0, 0, 0, 0.81);
   width: 100%;
@@ -6,14 +7,87 @@
   top: 0;
   left: 0;
 
+  animation-name: fadeIn;
+  animation-duration: 0.2s;
+
+  &-mobile-close {
+    animation-duration: 0.5s;
+    animation-name: fadeOut;
+  }
+
+  &-mobile-inner-close {
+    animation-name: slideOut;
+    animation-duration: 0.2s;
+  }
+
   &-inner {
     position: absolute;
-    top: 4.3rem;
-    right: 4.8rem;
+    top: 5%;
+    right: 5%;
+    animation-duration: 0.5s;
+    animation-name: slideIn;
   }
 
   &-close {
     position: relative;
     z-index: 100;
+  }
+}
+
+.NavbarMobile {
+  padding-top: 2.9rem;
+
+  &-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3.6rem;
+  }
+  &-link {
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: $white;
+
+    transition: color 0.3s linear;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
