@@ -1,0 +1,99 @@
+@import "../../vars";
+@import "../../mixins";
+.popup {
+  &-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+
+    animation-duration: 0.2s;
+    animation-name: fadeIn;
+
+    overflow: auto;
+
+    &-close {
+      animation-duration: 0.5s;
+      animation-name: fadeout;
+    }
+  }
+  &-content {
+
+    background-color: $white;
+    max-width: 450px;
+    width: 100%;
+    margin: 70px auto;
+    padding: 10px 12px;
+    border-radius: $radius;
+
+    animation-duration: 0.5s;
+    animation-name: slideIn;
+    &-close {
+      animation-duration: 0.3s;
+      animation-name: slideOut;
+    }
+
+    @include breakpoint($tablet-width) {
+      max-width: 400px;
+      padding: 25px 10px;
+    }
+    @include breakpoint($tablet-mobile-width) {
+      max-width: 300px;
+    }
+    @include breakpoint($mobile-width) {
+      max-width: 250px;
+    }
+  }
+  &-close {
+    background-color: transparent;
+    border: none;
+    transform: scale(0.7);
+    font-size: 0;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: scale(0.1);
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

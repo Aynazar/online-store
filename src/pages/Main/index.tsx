@@ -2,7 +2,6 @@ import { memo } from "react";
 import Inner from "@/components/main/Inner";
 
 import styles from "./Main.module.scss";
-import { ProductsData } from "@/data/ProductsData.ts";
 import Product from "@/components/main/Product";
 import Slider from "@/components/ui/Slider.tsx";
 import Receipts from "@/components/main/Receipts";
@@ -10,8 +9,16 @@ import { DReceipts } from "@/data/ReceiptsData.ts";
 import getRandomInt from "@/utils/getRandomInt.ts";
 import AboutIt from "@/components/main/AboutIt";
 import clsx from "@/utils/clsx.ts";
+import { useQuery } from "@tanstack/react-query";
+import { productService } from "@/api/services/products/product.service.ts";
+import { IProduct } from "@/api/types/product.interface.ts";
 
 const Main = () => {
+  const { data } = useQuery({
+    queryKey: ["product"],
+    queryFn: productService.getAllProducts,
+  });
+
   const randomId = getRandomInt(1, DReceipts.length);
   const objs = DReceipts.filter((el) => el.id !== randomId);
   return (
@@ -45,9 +52,10 @@ const Main = () => {
       </div>
       <div className={styles["Main-products-item"]}>
         <Slider>
-          {ProductsData.map((data) => (
-            <Product {...data} key={data.id} />
-          ))}
+          {data &&
+            data?.data.map((obj: IProduct) => (
+              <Product {...obj} key={obj.id} />
+            ))}
         </Slider>
       </div>
 
@@ -58,9 +66,9 @@ const Main = () => {
       <div className={styles["Main-catalog"]}>
         <div className={styles["Main-title"]}>Каталог товаров</div>
         <div className={styles["Main-catalog-item"]}>
-          {ProductsData.map((obj) => (
+          {/*{ProductsData.map((obj) => (
             <Product {...obj} key={obj.id} />
-          ))}
+          ))}*/}
         </div>
       </div>
 

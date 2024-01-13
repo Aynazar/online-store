@@ -7,6 +7,7 @@ import styles from "./Button.module.scss";
 interface OwnProps {
   type?: "submit" | "reset" | "button";
   variant?: "solid" | "outline";
+  size?: "sm" | "lm" | "default";
   disabled?: boolean;
   className?: string;
   children?: ReactNode;
@@ -20,6 +21,7 @@ const Button: FC<OwnProps> = ({
   children,
   className,
   onClick,
+  size,
 }) => {
   return (
     <button
@@ -27,7 +29,12 @@ const Button: FC<OwnProps> = ({
       disabled={disabled}
       type={type}
       onClick={onClick}
-      className={clsx(styles["Button"], styles[`Button-${variant}`], className)}
+      className={clsx(
+        styles["Button"],
+        styles[`Button-${variant}`],
+        styles[`Button-${size}`],
+        className,
+      )}
     >
       <div className={styles["Button-text"]}>{children}</div>
     </button>

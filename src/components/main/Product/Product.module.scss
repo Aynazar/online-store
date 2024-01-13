@@ -11,6 +11,8 @@
   &-inside {
     user-select: none;
     padding: 0 13px;
+    position: relative;
+    overflow: hidden;
   }
 
   &-title {
@@ -54,18 +56,21 @@
     &-link {
       display: flex;
       align-items: center;
-      gap: 50px;
 
       span {
         color: $text-color-secondary;
         font-size: 1.2rem;
         font-weight: 400;
 
-        display: block;
-        width: 60%;
+        display: flex;
+        width: 100px;
       }
+
       p {
-        margin: 0 auto;
+        width: 90px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

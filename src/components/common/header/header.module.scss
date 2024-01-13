@@ -1,5 +1,5 @@
-@import "../../vars";
-@import "../../mixins";
+@import "../../../vars";
+@import "../../../mixins";
 .header {
   flex: 0 0 auto;
 }
@@ -15,7 +15,6 @@
       @include breakpoint($tablet-width) {
         display: none;
       }
-
     }
   }
   &-logo {
@@ -71,6 +70,10 @@
       display: none;
     }
   }
+  &-button {
+    background-color: transparent;
+    border: none;
+  }
   &-profile {
     color: $text-color;
     font-size: 1.2rem;
@@ -97,14 +100,13 @@
   }
 
   &-info {
+    position: relative;
     @include breakpoint($tablet-mobile-width) {
       display: none;
     }
   }
 
   &-burger {
-    display: none;
-
     width: 3.1rem;
     height: 0.3rem;
     background-color: $text-color;
@@ -129,9 +131,51 @@
       position: absolute;
       top: 0.7rem;
     }
-
+  }
+  &-menu {
+    display: none;
+    cursor: pointer;
+    width: 31px;
+    height: 31px;
+    justify-content: center;
+    align-items: center;
     @include breakpoint($tablet-width) {
-      display: block;
+      display: flex;
+    }
+  }
+  &-tab {
+    position: absolute;
+    z-index: 100;
+    top: calc(100% + 13px);
+    right: 0;
+
+    overflow: hidden;
+
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    background-color: $white;
+    width: 250px;
+    border-radius: $radius;
+    &-list {
+      padding: 25px 25px;
+    }
+    &-link {
+      font-size: 12px;
+      font-weight: 700;
+      color: $text-color;
+
+      padding: 6px 0 6px;
+
+      &:first-child {
+        padding: 0 0 6px;
+      }
+    }
+  }
+  &-add {
+    cursor: pointer;
+
+    transition: all .1s linear;
+    &:hover {
+      color: $pink;
     }
   }
 }

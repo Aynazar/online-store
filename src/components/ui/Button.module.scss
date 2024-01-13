@@ -10,6 +10,8 @@
 
   white-space: nowrap;
 
+  border-radius: 5px;
+
   &-outline {
     border: 1px solid $pink;
     background-color: transparent;
@@ -24,6 +26,9 @@
 
     padding: 1.8rem 4.6rem;
     box-shadow: 0px 7px 35px 0px rgba(235, 45, 102, 0.35);
+  }
+  &-sm {
+    padding: 9px 26px;
   }
 }
 .Button[disabled] {

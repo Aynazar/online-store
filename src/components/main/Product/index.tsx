@@ -5,22 +5,29 @@ import styles from "./Product.module.scss";
 import { Icons } from "@/components/ui/icons/ArrowIcon.tsx";
 import ArrowIconSolid = Icons.ArrowIconSolid;
 import { Link } from "react-router-dom";
-
 interface OwnProps {
-  id?: number;
+  id: string;
   title: string;
-  previewUrl: string;
-  info: string[];
   price: number;
+  userId: string;
+  images: string[];
+  description: string[];
 }
 
-const Product: FC<OwnProps> = ({ id, title, info, previewUrl, price }) => {
+const Product: FC<OwnProps> = ({
+  id,
+  title,
+  price,
+  description,
+  images,
+  userId,
+}) => {
   return (
     <Link
       to={`/product/${id}`}
       className={styles["Product"]}
-      aria-colindex={id}
-      about={info.pop()}
+      aria-label={id}
+      about={`user ${userId}`}
     >
       <div className={styles["Product-content"]}>
         <div className={styles["Product-inside"]}>
@@ -28,19 +35,19 @@ const Product: FC<OwnProps> = ({ id, title, info, previewUrl, price }) => {
           <picture className={styles["Product-preview"]}>
             <img
               className={styles["Product-img"]}
-              src={previewUrl}
+              src={images[0]}
               alt={title}
               about={title}
-              style={{ width: "181", height: "213px" }}
+              style={{ width: "191px", height: "213px" }}
             />
           </picture>
           <ul className={styles["Product-info"]}>
             <li className={styles["Product-info-link"]}>
-              <span>Корпус:</span> <p>{info.pop()}</p>
+              <span>Корпус:</span> <p>{description[0]}</p>
             </li>
             <li className={styles["Product-info-link"]}>
               <span>Влагозащита:</span>
-              <p>ewrer23</p>
+              <p>{description[1]}</p>
             </li>
             <li className={styles["Product-info-link"]}>
               <span>Цвет:</span>

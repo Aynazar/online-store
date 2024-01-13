@@ -11,9 +11,10 @@ import NavMobile from "@/components/common/Navbar/NavMobile.tsx";
 interface OwnProps {
   isOpen?: boolean;
   closeNavbar: () => void;
+  onOpenPopup: () => void;
 }
 
-const Navbar: FC<OwnProps> = ({ isOpen, closeNavbar }) => {
+const Navbar: FC<OwnProps> = ({ isOpen, closeNavbar, onOpenPopup }) => {
   const navbarRef = document.getElementById("navbar-mobile");
   const { mount } = useMount({ isOpen });
 
@@ -35,10 +36,11 @@ const Navbar: FC<OwnProps> = ({ isOpen, closeNavbar }) => {
         )}
       >
         <div className={styles["Navbar-close"]} onClick={closeNavbar}>
-          <CloseIcon />
-
-          <NavMobile />
+          <button className={styles["Navbar-button"]} type="button">
+            <CloseIcon />
+          </button>
         </div>
+        <NavMobile closeNavbar={closeNavbar} onOpenPopup={onOpenPopup} />
       </div>
     </div>,
     navbarRef,

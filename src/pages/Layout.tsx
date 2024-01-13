@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { ReactNode } from "react";
-import Header from "../components/common/Header.tsx";
+import Header from "../components/common/header/Header.tsx";
 import Footer from "@/components/common/Footer.tsx";
 
 interface OwnProps {
@@ -20,6 +20,7 @@ const Layout: FC<OwnProps> = ({ children }) => {
         <Footer />
       </div>
       <div id="navbar-mobile"></div>
+      <div id="popup"></div>
     </>
   );
 };
