@@ -52,10 +52,7 @@ const Main = () => {
       </div>
       <div className={styles["Main-products-item"]}>
         <Slider>
-          {data &&
-            data?.data.map((obj: IProduct) => (
-              <Product {...obj} key={obj.id} />
-            ))}
+          {data?.data.map((obj: IProduct) => <Product {...obj} key={obj.id} />)}
         </Slider>
       </div>
 
@@ -66,9 +63,7 @@ const Main = () => {
       <div className={styles["Main-catalog"]}>
         <div className={styles["Main-title"]}>Каталог товаров</div>
         <div className={styles["Main-catalog-item"]}>
-          {/*{ProductsData.map((obj) => (
-            <Product {...obj} key={obj.id} />
-          ))}*/}
+          {data?.data.map((obj: IProduct) => <Product {...obj} key={obj.id} />)}
         </div>
       </div>
 
