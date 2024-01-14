@@ -1,26 +1,39 @@
-import { memo } from "react";
+//@ts-nocheck
+import { memo, useEffect } from "react";
 import Inner from "@/components/main/Inner";
 
 import styles from "./Main.module.scss";
 import Product from "@/components/main/Product";
 import Slider from "@/components/ui/Slider.tsx";
 import Receipts from "@/components/main/Receipts";
-import { DReceipts } from "@/data/ReceiptsData.ts";
-import getRandomInt from "@/utils/getRandomInt.ts";
 import AboutIt from "@/components/main/AboutIt";
 import clsx from "@/utils/clsx.ts";
 import { useQuery } from "@tanstack/react-query";
 import { productService } from "@/api/services/products/product.service.ts";
 import { IProduct } from "@/api/types/product.interface.ts";
+import { useAppDispatch } from "@/store/store.ts";
+import useActions from "@/hooks/useActions.ts";
+import { useTypedSelector } from "@/hooks/useTypedSelector.ts";
 
 const Main = () => {
+  const dispatch = useAppDispatch();
+  const categoryData = useTypedSelector((state) => state.category?.data);
+  const { GetAllCategoryAction } = useActions();
+
   const { data } = useQuery({
     queryKey: ["product"],
     queryFn: productService.getAllProducts,
   });
 
-  const randomId = getRandomInt(1, DReceipts.length);
-  const objs = DReceipts.filter((el) => el.id !== randomId);
+  useEffect(() => {
+    dispatch(GetAllCategoryAction);
+  }, [dispatch]);
+
+  /*const randomId = getRandomInt(1, 5);
+  const objs = categoryData!.filter((state) => state.id !== randomId);*/
+
+  if (!categoryData) return null;
+
   return (
     <>
       <Inner />
@@ -57,7 +70,7 @@ const Main = () => {
       </div>
 
       <div className={styles["Main-receipts"]}>
-        <Receipts receipts={objs} />
+        <Receipts receipts={categoryData} />
       </div>
 
       <div className={styles["Main-catalog"]}>

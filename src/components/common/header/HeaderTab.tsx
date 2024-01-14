@@ -10,9 +10,10 @@ import clsx from "@/utils/clsx.ts";
 
 interface OwnProps {
   isActive: boolean;
+  openCategoryPopup: () => void;
 }
 
-const HeaderTab: FC<OwnProps> = ({ isActive }) => {
+const HeaderTab: FC<OwnProps> = ({ isActive, openCategoryPopup }) => {
   const dispatch = useAppDispatch();
   const { logout } = useActions();
   const { data } = useQuery({
@@ -32,21 +33,39 @@ const HeaderTab: FC<OwnProps> = ({ isActive }) => {
   }
 
   return (
-    <div className={styles["header-tab"]}>
-      <ul className={styles["header-tab-list"]}>
-        <li className={styles["header-tab-link"]}>{data.email}</li>
-        {data.roles.includes("ADMIN") && (
-          <li className={clsx(styles["header-tab-link"], styles["header-add"])}>
-            Добавить продукт
+    <>
+      <div className={styles["header-tab"]}>
+        <ul className={styles["header-tab-list"]}>
+          <li className={styles["header-tab-link"]}>{data.email}</li>
+          {data.roles.includes("ADMIN") && (
+            <>
+              <li
+                className={clsx(
+                  styles["header-tab-link"],
+                  styles["header-add"],
+                )}
+              >
+                Добавить продукт
+              </li>
+              <li
+                className={clsx(
+                  styles["header-tab-link"],
+                  styles["header-add"],
+                )}
+                onClick={openCategoryPopup}
+              >
+                Добавить категорию
+              </li>
+            </>
+          )}
+          <li className={styles["header-tab-link"]}>
+            <Button type="button" variant="solid" size="sm" onClick={onLogout}>
+              Выйти
+            </Button>
           </li>
-        )}
-        <li className={styles["header-tab-link"]}>
-          <Button type="button" variant="solid" size="sm" onClick={onLogout}>
-            Выйти
-          </Button>
-        </li>
-      </ul>
-    </div>
+        </ul>
+      </div>
+    </>
   );
 };
 

@@ -1,0 +1,100 @@
+@import "../../../vars";
+@import "../../../mixins";
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 10px 70px;
+
+  &-title {
+    font-size: 25px;
+    font-weight: 900;
+    color: $text-color;
+    padding: 10px 0 20px;
+    text-align: center;
+  }
+
+  &-label {
+    width: calc(100% - 20px);
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    padding: 10px 5px;
+
+    font-size: 13px;
+    font-weight: 700;
+    color: $text-color;
+    @include breakpoint($tablet-width) {
+      padding: 10px 10px;
+    }
+    @include breakpoint($tablet-mobile-width) {
+      padding: 10px 15px;
+    }
+    @include breakpoint($mobile-width) {
+      padding: 10px 20px;
+    }
+  }
+  &-input {
+    margin: 7px 0 0;
+
+    outline: 0;
+    border: 1px solid $pink;
+    border-radius: 5px;
+    padding: 5px 12px;
+
+    transition: all 0.3s linear;
+
+    &::placeholder {
+      color: $text-color;
+      opacity: 0.8;
+      font-weight: 500;
+    }
+    &:focus {
+      background-color: $pink;
+      color: $white;
+
+      &::placeholder {
+        color: $white;
+        opacity: 0.8;
+      }
+    }
+  }
+  &-textarea {
+    height: 150px;
+    resize: none;
+  }
+  &-link {
+    padding: 15px 0 5px;
+
+    font-size: 12px;
+    color: $pink;
+    cursor: pointer;
+  }
+
+  &-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30px;
+    height: 30px;
+    background-color: $pink;
+    border-radius: $radius;
+
+    margin: 0 0 0 7px;
+
+    cursor: pointer;
+
+    svg path {
+      fill: $white;
+    }
+  }
+  &-bottom {
+    margin: 15px 0 0;
+    display: flex;
+    align-items: center;
+  }
+}
