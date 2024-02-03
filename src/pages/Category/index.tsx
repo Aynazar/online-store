@@ -1,4 +1,5 @@
-import { ChangeEvent, FC, memo, useCallback, useRef, useState } from "react";
+//@ts-nocheck
+import { ChangeEvent, memo, useCallback, useRef, useState } from "react";
 import Button from "@/components/ui/Button.tsx";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -6,32 +7,34 @@ import * as yup from "yup";
 
 import styles from "./category.module.scss";
 import clsx from "@/utils/clsx.ts";
-import { categoryService } from "@/api/services/category/category.service.ts";
 import { ICategoryPayload } from "@/api/types/category.interface.ts";
 import { useAppDispatch } from "@/store/store.ts";
 import useActions from "@/hooks/useActions.ts";
-
-const CreateCategoryDto = yup.object().shape({
-  title: yup.string().required(),
-  description: yup.string().min(6).required(),
-  images: yup.array(),
-});
+import { fetchUploadImage } from "@/utils/fetchUploadImage.ts";
+import Snackbar from "@/components/ui/Snackbar.tsx";
+import { SnackbarType } from "@/components/ui/types";
+import useSnackbar from "@/hooks/useSnackbar.ts";
 
 export interface IImage {
+  blobUrl: string;
   file: File;
 }
 
-interface OwnProps {
-  closeCategoryPopup: () => void;
-}
-
-const CategoryCreate: FC<OwnProps> = ({ closeCategoryPopup }) => {
-  const imgRef = useRef<HTMLInputElement>(null);
+const CreateCategoryDto = yup.object().shape({
+  title: yup.string().min(4).required(),
+  description: yup.string().min(6).required(),
+  brand: yup.string().required(),
+  images: yup.mixed().oneOf([yup.array().of(yup.string()), yup.string()]),
+});
+const CategoryPage = () => {
   const [images, setImages] = useState<IImage[]>([]);
+  const { set, type, message, isOpen } = useSnackbar();
+
+  const imgRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const { fetchCategoryAction } = useActions();
 
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, reset, formState } = useForm({
     mode: "onChange",
     resolver: yupResolver(CreateCategoryDto),
   });
@@ -40,63 +43,112 @@ const CategoryCreate: FC<OwnProps> = ({ closeCategoryPopup }) => {
     if (imgRef.current) imgRef.current.click();
   }, []);
 
-  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement;
-    //@ts-ignore
-    setImages(target.files);
+  const removeImage = useCallback((url: string) => {
+    setImages((prev) => prev.filter((obj) => obj.blobUrl !== url));
   }, []);
 
-  const onSubmit = async (data: ICategoryPayload) => {
-    try {
-      let results = [];
-      for (let i = 0; i < images.length; i++) {
-        const file = images[i];
-        //@ts-ignore
-        const { data } = await categoryService.uploadImage(file);
-        const url = `http://localhost:8888/images/${data[0].filename}`;
-        results.push(url);
-      }
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    const file = target.files?.[0];
 
-      closeCategoryPopup();
-      dispatch(
-        fetchCategoryAction({
-          title: data.title,
-          description: data.description,
-          images: results,
-        }),
-      );
-      console.log(closeCategoryPopup);
-      setImages([]);
-    } catch (err) {}
+    if (file) {
+      const fileObj = new Blob([file]);
+
+      setImages((images) => [
+        ...images,
+        {
+          file,
+          blobUrl: URL.createObjectURL(fileObj),
+        },
+      ]);
+    }
   };
 
+  const onSubmit = async (data: ICategoryPayload): Promise<void> => {
+    try {
+      const results = fetchUploadImage(images);
+
+      results
+        .then((res, _) => {
+          dispatch(
+            fetchCategoryAction({
+              title: data.title,
+              brand: data.brand,
+              description: data.description,
+              images: res.results,
+            }),
+          );
+          set(true, "Категория создана успешно!", SnackbarType.SUCCESS);
+        })
+        .catch((err) => {
+          set(true, "Ошибка при создании категории!", SnackbarType.ERROR);
+          console.error(err);
+        });
+
+      setImages([]);
+      reset({
+        title: "",
+        description: "",
+        brand: "",
+      });
+    } catch (err) {
+      set(true, "Ошибка при создании категории!", SnackbarType.ERROR);
+    }
+  };
   return (
     <>
       <div className={styles["category-title"]}>Добавить категорию</div>
       <form className={styles["category"]} onSubmit={handleSubmit(onSubmit)}>
-        <label className={styles["category-label"]}>
-          Название
-          <input
-            className={styles["category-input"]}
-            type="text"
-            placeholder="Введите название категории"
-            {...register("title")}
-            name="title"
-          />
-        </label>
+        <div className={styles["category-content"]}>
+          <div className={styles["category-cell"]}>
+            <label className={styles["category-label"]}>
+              Название
+              <input
+                autoFocus
+                className={styles["category-input"]}
+                type="text"
+                placeholder="Введите название категории"
+                {...register("title")}
+                name="title"
+              />
+            </label>
+            <label className={styles["category-label"]}>
+              Бренд
+              <input
+                className={styles["category-input"]}
+                type="text"
+                placeholder="Введите название бренда"
+                {...register("brand")}
+                name="brand"
+              />
+            </label>
 
-        <label className={styles["category-label"]}>
-          Описание
-          <textarea
-            className={clsx(
-              styles["category-input"],
-              styles["category-textarea"],
-            )}
-            placeholder="Введите описание продукта"
-            {...register("description")}
-            name="description"
-          />
-        </label>
+            <label className={styles["category-label"]}>
+              Описание
+              <textarea
+                className={clsx(
+                  styles["category-input"],
+                  styles["category-textarea"],
+                )}
+                placeholder="Введите описание продукта"
+                {...register("description")}
+                name="description"
+              />
+            </label>
+          </div>
+          <div className={styles["category-cell"]}>
+            {images.map((image) => (
+              <div
+                title="Нажмите два раза, чтобы удалить изображение"
+                onDoubleClick={() => removeImage(image.blobUrl)}
+                key={image.blobUrl}
+                className={styles["category-image"]}
+                style={{ backgroundImage: `url(${image.blobUrl})` }}
+              ></div>
+            ))}
+          </div>
+        </div>
+
         <div className={styles["category-bottom"]}>
           <Button
             type="submit"
@@ -125,8 +177,8 @@ const CategoryCreate: FC<OwnProps> = ({ closeCategoryPopup }) => {
             </svg>
           </div>
           <input
-            ref={imgRef}
             multiple
+            ref={imgRef}
             type="file"
             accept="image/png, image/jpeg"
             hidden
@@ -135,8 +187,15 @@ const CategoryCreate: FC<OwnProps> = ({ closeCategoryPopup }) => {
           />
         </div>
       </form>
+      <Snackbar
+        message={message}
+        type={SnackbarType.SUCCESS}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        timeout={100}
+      />
     </>
   );
 };
 
-export default memo(CategoryCreate);
+export default memo(CategoryPage);

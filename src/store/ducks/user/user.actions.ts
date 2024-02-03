@@ -19,11 +19,15 @@ export const fetchSignInAction = createAsyncThunk<IUser, SignInAuthDto>(
   },
 );
 
-export const fetchSignUpAction = createAsyncThunk<IUser, SignUpAuthDto>(
+export const fetchSignUpAction = createAsyncThunk<any, SignUpAuthDto>(
   "user/SIGN_UP",
   async (data, thunkApi) => {
     try {
-      const res = await authService.SignUp(data);
+      const res = await authService.SignUp({
+        email: data.email,
+        fullName: data.fullName,
+        password: data.password,
+      });
 
       return res;
     } catch (err) {

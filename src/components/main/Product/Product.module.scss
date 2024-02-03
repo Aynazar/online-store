@@ -16,6 +16,11 @@
   }
 
   &-title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 191px;
+
     font-weight: 900;
     font-size: 1.7rem;
     line-height: 2rem;

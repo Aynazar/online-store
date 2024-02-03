@@ -17,21 +17,24 @@ export const categoryService = {
   async uploadImage(image: File) {
     let formData = new FormData();
     formData.append("images", image);
-    const img = await instance.post("/category/upload-images", formData, {
+    const { data } = await instance.post("/category/upload-images", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
 
-    return img;
+    return data;
   },
 
   async createCategory(payload: ICategoryPayload): Promise<ICategoryPayload> {
     const { data } = await instance.post("/category", {
       title: payload.title,
       description: payload.description,
+      brand: payload.brand,
       images: payload.images,
     });
+
+    console.log(data);
 
     return data;
   },

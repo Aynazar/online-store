@@ -28,6 +28,7 @@ const SignInComponent: FC<OwnProps> = ({ onClick }) => {
 
   const onSubmit = async (data: SignInAuthDto) => {
     try {
+      document.body.classList.remove("no-scroll");
       dispatch(fetchSignInAction(data));
     } catch (err) {}
   };

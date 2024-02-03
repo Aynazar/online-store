@@ -3,30 +3,16 @@ import { memo, useCallback, useState } from "react";
 
 import styles from "./header.module.scss";
 import HeaderTab from "@/components/common/header/HeaderTab.tsx";
-import Popup from "@/components/ui/popup.tsx";
-import CategoryCreate from "@/components/main/Category/CategoryCreate.tsx";
 
 interface OwnProps {
   wallet: number;
 }
 
 const HeaderProfile: FC<OwnProps> = ({ wallet }) => {
-  const [isOpenCategoryPopup, setIsOpenCategoryPopup] =
-    useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
   const onVisibleTab = useCallback(() => {
     console.log("test");
     setIsActive((prevState) => prevState === isActive);
-  }, []);
-
-  const onOpenCategoryPopup = useCallback(() => {
-    document.body.classList.add("no-scroll");
-    setIsOpenCategoryPopup(true);
-  }, []);
-
-  const closeCategoryPopup = useCallback(() => {
-    document.body.classList.remove("no-scroll");
-    setIsOpenCategoryPopup(false);
   }, []);
 
   return (
@@ -71,12 +57,9 @@ const HeaderProfile: FC<OwnProps> = ({ wallet }) => {
         </button>
         <HeaderTab
           isActive={isActive}
-          openCategoryPopup={onOpenCategoryPopup}
+          closeHeaderTab={() => setIsActive(false)}
         />
       </div>
-      <Popup isOpen={isOpenCategoryPopup} onClose={closeCategoryPopup}>
-        <CategoryCreate closeCategoryPopup={closeCategoryPopup} />
-      </Popup>
     </>
   );
 };

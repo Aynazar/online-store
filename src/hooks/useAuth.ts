@@ -11,5 +11,6 @@ export const useAuth = () => {
       (state) => state.user?.status === LoadingStatus.LOADED,
     ),
     isReady,
+    user: useTypedSelector((state) => state.user?.data),
   };
 };

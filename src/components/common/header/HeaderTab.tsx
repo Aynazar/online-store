@@ -7,13 +7,14 @@ import Button from "@/components/ui/Button.tsx";
 import { useAppDispatch } from "@/store/store.ts";
 import useActions from "@/hooks/useActions.ts";
 import clsx from "@/utils/clsx.ts";
+import { Link } from "react-router-dom";
 
 interface OwnProps {
   isActive: boolean;
-  openCategoryPopup: () => void;
+  closeHeaderTab: () => void;
 }
 
-const HeaderTab: FC<OwnProps> = ({ isActive, openCategoryPopup }) => {
+const HeaderTab: FC<OwnProps> = ({ isActive, closeHeaderTab }) => {
   const dispatch = useAppDispatch();
   const { logout } = useActions();
   const { data } = useQuery({
@@ -52,9 +53,10 @@ const HeaderTab: FC<OwnProps> = ({ isActive, openCategoryPopup }) => {
                   styles["header-tab-link"],
                   styles["header-add"],
                 )}
-                onClick={openCategoryPopup}
               >
-                Добавить категорию
+                <Link to="/account/create/category" onClick={closeHeaderTab}>
+                  Добавить категорию
+                </Link>
               </li>
             </>
           )}

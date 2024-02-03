@@ -1,17 +1,15 @@
-import { IUser } from "@/api/types/user.interface.ts";
-
 export type SignInAuthDto = {
   email: string;
   password: string;
 };
-export interface SignUpAuthDto extends IUser {
+export interface SignUpAuthDto {
   email: string;
   fullName: string;
   password: string;
 }
-export type RegisterAuthDto = {
+export interface RegisterAuthDto {
   email: string;
   firstName: string;
   lastName: string;
   password: string;
-};
+}

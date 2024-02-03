@@ -7,4 +7,9 @@ export const productService = {
 
     return data;
   },
+  async getProductById(id: string) {
+    const { data } = await instance.get(`/product/${id}`);
+
+    return data;
+  },
 };

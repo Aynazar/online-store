@@ -30,6 +30,7 @@ const SignInComponent: FC<OwnProps> = ({ onClick }) => {
   });
   const onSubmit = async (data: RegisterAuthDto) => {
     try {
+      document.body.classList.remove("no-scroll");
       dispatch(
         fetchSignUpAction({
           email: data.email,

@@ -31,7 +31,9 @@ const Product: FC<OwnProps> = ({
     >
       <div className={styles["Product-content"]}>
         <div className={styles["Product-inside"]}>
-          <div className={styles["Product-title"]}>{title}</div>
+          <div className={styles["Product-title"]} title={title}>
+            {title}
+          </div>
           <picture className={styles["Product-preview"]}>
             <img
               className={styles["Product-img"]}

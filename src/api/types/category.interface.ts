@@ -2,7 +2,7 @@ export interface ICategory {
   id: string;
   title: string;
   description: string;
-  images: string[];
+  images?: string[];
   userId: string;
 
   createdAt: string;
@@ -12,5 +12,6 @@ export interface ICategory {
 export type ICategoryPayload = {
   title: string;
   description: string;
-  images: string[] | undefined;
+  brand: string;
+  images?: string[];
 };

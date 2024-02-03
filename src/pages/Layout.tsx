@@ -19,8 +19,9 @@ const Layout: FC<OwnProps> = ({ children }) => {
 
         <Footer />
       </div>
-      <div id="navbar-mobile"></div>
-      <div id="popup"></div>
+      <div id="navbar-mobile" />
+      <div id="popup" />
+      <div id="notifications" />
     </>
   );
 };

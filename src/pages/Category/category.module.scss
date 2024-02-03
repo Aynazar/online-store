@@ -1,20 +1,56 @@
-@import "../../../vars";
-@import "../../../mixins";
+@import "../../vars";
+@import "../../mixins";
 .category {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  &-content {
+    display: flex;
+    padding: 10px 0;
 
-  padding: 10px 70px;
+    @include breakpoint($mobile-width) {
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+
+  &-cell {
+    width: 60%;
+
+    &:last-child {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 10px;
+
+      @include breakpoint($tablet-width) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @include breakpoint($mobile-width) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
 
   &-title {
     font-size: 25px;
     font-weight: 900;
     color: $text-color;
     padding: 10px 0 20px;
-    text-align: center;
+    @include breakpoint($mobile-width) {
+      text-align: center;
+    }
   }
+  &-image {
+    cursor: pointer;
 
+    padding: 10px 0;
+    max-width: 100%;
+    height: 100px;
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    border-radius: $radius;
+  }
   &-label {
     width: calc(100% - 20px);
 
@@ -96,5 +132,21 @@
     margin: 15px 0 0;
     display: flex;
     align-items: center;
+
+    @include breakpoint($mobile-width) {
+      position: fixed;
+      z-index: 1000;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
+      background-color: $white;
+      width: 100%;
+      padding: 12px 10px;
+      border-top: 1px solid rgba($bg-color, 0.2);
+
+      display: flex;
+      justify-content: center;
+    }
   }
 }
