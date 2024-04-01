@@ -72,4 +72,4 @@ const SignInComponent: FC<OwnProps> = ({ onClick }) => {
   );
 };
 
-export default memo(SignInComponent);
+export default SignInComponent;
