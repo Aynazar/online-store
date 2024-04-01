@@ -9,6 +9,3 @@ export const fetchUploadImage = async (images: IImage[]) => {
     const url = `http://localhost:8888/images/${data[0].filename}`;
     results.push(url);
   }
-
-  return { results: results };
-};
